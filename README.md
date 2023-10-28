@@ -83,13 +83,13 @@ This type of counter is normally referred to as a Down Counter, (CTD). In a bina
 
 
 ### PROGRAM 
-/*
+```
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
 Developed by: Priyanka.A
 RegisterNumber:  212222230113
-*/
-### UPCOUNTER:
 ```
+### UPCOUNTER:
+```py
 module upcounter(A,clk);
 output reg [3:0]A;
 input clk;
@@ -103,7 +103,7 @@ end
 endmodule
 ```
 ### DOWNCOUNTER:
-```
+```py
 module downcounter(A,clk);
 output reg [3:0]A;
 input clk;
