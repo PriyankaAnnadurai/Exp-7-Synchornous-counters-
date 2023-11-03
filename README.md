@@ -1,4 +1,4 @@
-# Exp-6-Synchornous-counters - up counter and down counter 
+# Exp-6-SYNCHORNOUS-COUNTERS - UP COUNTER AND DOWN COUNTER
 ### AIM: To implement 4 bit up and down counters and validate  functionality.
 ### HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
 ### SOFTWARE REQUIRED:   Quartus prime
@@ -47,40 +47,14 @@ This type of counter is normally referred to as a Down Counter, (CTD). In a bina
 4-bit Count Down Counter
 ### Procedure
 
-
-1.Create a New Project:
-  Open Quartus and create a new project by selecting "File" > "New Project Wizard."
-  Follow the wizard's instructions to set up your project, including specifying the project name, 
-  location, and target device (FPGA).
-
-2.Create a New Design File:
-  Once the project is created, right-click on the project name in the Project Navigator and 
-  select "Add New File."
-   Choose "Verilog HDL File" or "VHDL File," depending on your chosen hardware description 
-   language.
-
-3.Write the Combinational Logic Code:
-   Open the newly created Verilog or VHDL file and write the code for your combinational logic.
-
-4.Compile the Project:
-    To compile the project, click on "Processing" > "Start Compilation" in the menu.
-    Quartus will analyze your code, synthesize it into a netlist, and perform optimizations based 
-    on your target FPGA device.
-
- 5.Analyze and Fix Errors:
-    If there are any errors or warnings during the compilation process, Quartus will display them 
-    in the Messages window.
-    Review and fix any issues in your code if necessary.
-    View the RTL diagram.
-
- 6.Verification:
-    Click on "File" > "New" > "Verification/Debugging Files" > "University Program VWF".
-    Once Waveform is created Right Click on the Input/Output Panel > " Insert Node or Bus" > 
-    Click on Node Finder > Click On "List" > Select All.
-    Give the Input Combinations according to the Truth Table amd then simulate the Output 
-    Waveform.
-
-
+1.Create a new project in QuartusII software.
+2.Name the project as uc for upcounter and dc for down counter.
+3.Create a new verilog hdl file in the project file.
+4.Name the module as dc and uc for down counter and up counter.
+5.Within the module declare input and output variables.
+6.Create a loop using if-else with condition parameter as reset value.
+7.End the loop.
+8.End the module.
 
 ### PROGRAM 
 ```
@@ -90,41 +64,41 @@ RegisterNumber:  212222230113
 ```
 ### UPCOUNTER:
 ```py
-module upcounter(A,clk);
-output reg [3:0]A;
+module Counters(clk,A);
 input clk;
-always@(posedge clk)
+output reg [3:0]A;
+always @(posedge clk)
 begin
-A[0]=((((A[1])&(A[2]))&A[3])^A[0]);
-A[1]=(((A[2])&(A[3]))^A[1]);
-A[2]=((A[3])^A[2]);
-A[3]=1^A[3];
+	A[3]=(((A[0])&(A[1])&(A[2]))^A[3]);
+	A[2]=(((A[0])&(A[1]))^A[2]);
+	A[1]=(A[0])^A[1];
+	A[0]=A[0]^1;
 end
 endmodule
 ```
 ### DOWNCOUNTER:
 ```py
-module downcounter(A,clk);
-output reg [3:0]A;
+module dCounters(clk,A);
 input clk;
+output reg [3:0]A;
 always@(posedge clk)
 begin
-A[3]=((((~A[2])&(~A[1]))&(~A[0]))^A[3]);
-A[2]=(((~A[1])&(~A[0]))^A[2]);
-A[1]=((~A[0])^A[1]);
-A[0]=1^A[0];
+	A[3]=(((~A[0])&(~A[1])&(~A[2]))^A[3]);
+	A[2]=(((~A[0])&(~A[1]))^A[2]);
+	A[1]=(~A[0])^A[1];
+	A[0]=1^A[0];
 end
 endmodule
 ```
 ### RTL LOGIC UP COUNTER AND DOWN COUNTER  
 #### Upcounter RTL:
+![image](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/0d896bdd-5166-4f71-bae4-d23ec844498b)
 
-![276819606-49af02c1-f493-4afb-81dd-d91b04943572](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/02c49678-14da-4d47-ab57-ff4b18c0475c)
 
 
 #### Downcounter RTL:
 
-![276817073-89e0c4ca-6147-4f76-88b9-c979707faffb](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/ca828e73-d275-4114-8e48-d2f85271cf18)
+![image](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/c5367f31-709b-440b-8972-ed40645707a7)
 
 
 
@@ -133,14 +107,14 @@ endmodule
 
 #### Upcounter Waveform:
 
+![image](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/d8728cf9-284d-4763-88d9-5bdda9724f65)
 
-![276819622-2b03a4a1-69a4-451b-b9b8-0fc08bc0fab3](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/370c4f09-7189-4e2d-a4c8-f680dd0b1f55)
 
 
 #### Downcounter Waveform:
 
+![image](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/3ae9b4dd-fe4e-436b-ba16-6774a3527ed5)
 
-![276817136-f8008a80-ae6d-44ef-9f8c-a2f4576a147f](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/80ad1d52-545d-4625-8aea-f79f9654aba0)
 
 
 
@@ -148,13 +122,13 @@ endmodule
 
 #### Upcounter Truthtable:
 
-![276818958-6bc209e3-5832-40e5-9d04-44574415a0ec](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/25cedb75-e0e4-4272-a89f-cc73d9d0b370)
+![image](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/f19a4665-0d2a-440f-b241-99a8dce4d771)
 
 
 #### Downcounter Truthtable:
 
-![276818973-89c724be-17f1-4290-9771-3bbe3998be07](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/da118ef7-9de1-4fba-b499-e625d837f4f6)
 
+![image](https://github.com/PriyankaAnnadurai/Exp-7-Synchornous-counters-/assets/118351569/7cd16223-f285-45d6-83eb-d2220a7e2904)
 
 
 ### RESULTS 
